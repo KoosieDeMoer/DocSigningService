@@ -1,0 +1,10 @@
+{
+  "logo_image_name": "africanbank.jpg",
+  "logo_background_colour": "#fff",
+  "logo_height": 67,
+  "logo_background_size_width": 221,
+  "logo_background_size_height": 67,
+  "body_background_colour": "#fff",
+  "table_heading_background_colour": "#002B60",
+  "submit_button_background_colour": "#89BC47"
+}

@@ -1,0 +1,184 @@
+<html>
+<head>
+
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<link rel='stylesheet'
+	href='//cdn.jsdelivr.net/foundation/5.0.2/css/foundation.min.css' />
+<!-- Font Awesome icons (Bootstrap, Foundation, and jQueryUI also supported) -->
+<link rel='stylesheet'
+	href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' />
+<title>Doc Signer</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="angular/angular.js"></script>
+<script src="js/desktop.controller.js"></script>
+<link rel="stylesheet" href="styles/style.css" />
+<link rel="stylesheet" href="/Other/branding" />
+</head>
+<body ng-app="MainModule" ng-controller="MainController">
+	<div class="logo"></div>
+	<div id="who" style="height: 50px;">Unknown</div>
+	<div class="error-box" ng-if="errorMessage"
+		ng-mouseover="showPopover()" ng-mouseleave="hidePopover()">{{
+		errorMessage.message }}</div>
+	<div class="popover" ng-show="popoverIsVisible">
+		<pre>{{ errorMessage.developerMessage }}</pre>
+	</div>
+	<div ng-if="!docLoaded">
+		<form>
+			<table>
+
+				<tr>
+					<th colspan="3" style="color: white">Load Document for Signing</th>
+				</tr>
+				<tr style="background-color: white">
+					<td>Document Type</td>
+					<td><select ng-model="model.name">
+							<option value="test_doc.pdf">Single Page</option>
+							<option value="test_multipage_doc.pdf">Multi Page</option>
+							<option value="cheque">Cheque</option>
+					</select></td>
+					<td colspan="2"><button type="button" ng-click="loadDoc()"
+							class="blue-button">Load</button></td>
+				</tr>
+				<tr>
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr>
+					<th colspan="3" style="color: white">Load Document for Sending</th>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="file"
+						file-model="model.fileToSend" accept=".PDF" required /></td>
+					<td colspan="2"><button type="button" ng-click="uploadDoc()"
+							class="blue-button">Upload</button></td>
+				</tr>
+				<tr style="background-color: white">
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr style="background-color: white">
+					<th colspan="3" style="color: white">Inbox</th>
+				</tr>
+				<tr>
+					<th style="color: white">Document</th>
+					<th style="color: white">Sender</th>
+					<th style="color: white">Status</th>
+				</tr>
+				<tr ng-repeat="rowContent in inbox">
+					<td><a href="{{rowContent.link}}"
+						ng-click="requestDoc(rowContent)">{{rowContent.document}}</a></td>
+					<td>{{rowContent.sender}}</td>
+					<td>{{rowContent.status}}</td>
+				</tr>
+				<tr style="background-color: white">
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr style="background-color: white">
+					<th colspan="3" style="color: white">Sent Items</th>
+				</tr>
+				<tr>
+					<th style="color: white">Document</th>
+					<th style="color: white">Recipient</th>
+					<th style="color: white">Status</th>
+				</tr>
+				<tr ng-repeat="rowContent in sentItems">
+					<td><a href="{{rowContent.link}}"
+						ng-click="viewDoc(rowContent)">{{rowContent.document}}</a></td>
+					<td>{{rowContent.recipient}}</td>
+					<td>{{rowContent.status}}</td>
+				</tr>
+			</table>
+		</form>
+		<div ng-if="isCheque">
+			<form ng-submit="loadCheque()">
+				<table>
+
+					<tr>
+						<th colspan="3" style="color: white">Enter cheque details</th>
+					</tr>
+					<tr>
+						<td>Payee</td>
+						<td><input type="text" ng-model="model.payee" required /></td>
+					</tr>
+					<tr>
+						<td>Amount in cents</td>
+						<td><input type="text" ng-model="model.amountCents" required /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="submit" value="Load"
+							class="blue-button" /></td>
+					</tr>
+				</table>
+			</form>
+
+		</div>
+	</div>
+	<div ng-if="docLoaded && !docSigned && (mode == 'sign')">
+		<form ng-submit="signDoc()">
+			<table>
+
+				<tr>
+					<th style="color: white">Sign Document</th>
+				</tr>
+				<tr>
+					<td><iframe ng-src="{{model.docUrl}}" width='600' height='770'
+							allowfullscreen webkitallowfullscreen></iframe></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="Sign" class="blue-button"
+						ng-disable="signButtonDisabled" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div ng-if="docLoaded && ((mode == 'send') || (mode == 'view'))">
+		<form ng-submit="">
+			<table>
+
+				<tr>
+					<th colspan="2" style="color: white">Send Document</th>
+				</tr>
+				<tr>
+					<td colspan="2"><iframe ng-src="{{model.docUrl}}" width='600'
+							height='770' allowfullscreen webkitallowfullscreen></iframe></td>
+				</tr>
+				<tr ng-if="(mode == 'send')">
+					<td><select style="width: 300px;" ng-model="model.recipient"
+						required>
+							<option value="">Select recipient</option>
+							<option value="Alice">alice@{{model.brand}}.com</option>
+							<option value="Bob">bob@{{model.brand}}.com</option>
+					</select></td>
+					<td><button type="button" ng-click="sendDoc()"
+							class="blue-button">Send</button></td>
+				</tr>
+				<tr ng-if="(mode == 'view')">
+					<td colspan="2"><button type="button" ng-click="closeDoc()"
+							class="blue-button">Close</button></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div ng-if="docLoaded && docSigned && (mode == 'sign')">
+		<table>
+
+			<tr>
+				<th style="color: white">Signed Document</th>
+			</tr>
+			<tr>
+				<td><iframe ng-src="{{model.docUrl}}" width='600' height='820'
+						allowfullscreen webkitallowfullscreen></iframe></td>
+			</tr>
+			<tr>
+				<td><button type="button" ng-click="closeDoc()"
+						class="blue-button">Close</button></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

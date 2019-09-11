@@ -1,0 +1,10 @@
+{
+  "logo_image_name": "payme.png",
+  "logo_background_colour": "#fff",
+  "logo_height": 50,
+  "logo_background_size_width": 126,
+  "logo_background_size_height": 50,
+  "body_background_colour": "#fff",
+  "table_heading_background_colour": "#afcb08",
+  "submit_button_background_colour": "#4c565c"
+}

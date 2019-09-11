@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.logo {
+	background-image: url("/Other/images/<logo_image_name>");
+	background-repeat: no-repeat;
+	background-color: <logo_background_colour>;
+	<logo_background_size>
+	height: <logo_height>px;
+	width:475px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	overflow: hidden;
+	text-indent: -999em;
+	background-repeat: no-repeat;
+}
+
+body {
+	background-color: <body_background_colour>;
+}
+
+th {
+	background-color: <table_heading_background_colour>;	
+}
+
+.blue-button {
+	background-color: <submit_button_background_colour>;
+}

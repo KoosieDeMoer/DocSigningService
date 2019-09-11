@@ -1,0 +1,10 @@
+{
+   "logo_image_name": "delta.jpg",
+   "logo_background_colour": "#011C47",
+   "logo_height": 80,
+   "logo_background_size_width": 80,
+   "logo_background_size_height": 80,
+   "body_background_colour": "#011C47",
+   "table_heading_background_colour": "#9A0130",
+   "submit_button_background_colour": "#003A72"
+}

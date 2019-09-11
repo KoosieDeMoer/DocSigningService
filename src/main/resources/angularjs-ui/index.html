@@ -1,0 +1,27 @@
+<html>
+<head>
+
+<title>Document Signing Demo Graphic</title>
+ <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel='stylesheet'
+	href='//cdn.jsdelivr.net/foundation/5.0.2/css/foundation.min.css'>
+<!-- Font Awesome icons (Bootstrap, Foundation, and jQueryUI also supported) -->
+<link rel='stylesheet'
+	href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
+<link rel="stylesheet" href="styles/style.css" />
+<script src="angular/angular.js"></script>
+<script src="js/main.controller.js"></script>
+<script src="js/support.js"></script>
+<head>
+<body ng-app="MainModule" ng-controller="MainController">
+	<div class="error-box" ng-if="errorMessage">{{ errorMessage }}</div>
+	<div>
+		<a onclick="closeOpenedWindows()" class="blue-button">Tear Down
+			Opened Browsers</a>
+	</div>
+	<div id="svgDiv"></div>
+</body>
+</html>

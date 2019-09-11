@@ -1,0 +1,10 @@
+{
+  "logo_image_name": "chargeme.png",
+  "logo_background_colour": "#002642",
+  "logo_height": 62,
+  "logo_background_size_width": 314,
+  "logo_background_size_height": 60,
+  "body_background_colour": "#002642",
+  "table_heading_background_colour": "#b80047",
+  "submit_button_background_colour": "#002642"
+}

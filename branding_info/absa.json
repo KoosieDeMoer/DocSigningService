@@ -1,0 +1,10 @@
+{
+  "logo_image_name": "absa.png",
+  "logo_background_colour": "#F4F4F4",
+  "logo_height": 70,
+  "logo_background_size_width": 0,
+  "logo_background_size_height": 0,
+  "body_background_colour": "#F4F4F4",
+  "table_heading_background_colour": "#000",
+  "submit_button_background_colour": "#9E000D"
+}

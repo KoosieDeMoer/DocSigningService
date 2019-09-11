@@ -1,0 +1,58 @@
+<html>
+<head>
+
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<link rel='stylesheet'
+	href='//cdn.jsdelivr.net/foundation/5.0.2/css/foundation.min.css' />
+<!-- Font Awesome icons (Bootstrap, Foundation, and jQueryUI also supported) -->
+<link rel='stylesheet'
+	href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="angular/angular.js"></script>
+<script src="js/sign-certificate.controller.js"></script>
+<link rel="stylesheet" href="styles/style.css" />
+<link rel="stylesheet" href="/Other/branding" />
+<title>Certificate Signing</title>
+<head>
+<body ng-app="MainModule" ng-controller="MainController">
+	<div class="logo"></div>
+	<div class="error-box" ng-if="errorMessage">{{ errorMessage }}</div>
+	<div ng-if="!newDocForm.signed">
+		<form ng-submit="signCertificate()">
+			<table style="width: 480">
+
+				<tr>
+					<th colspan="2" style="color: white;">Sign Certificate</th>
+				</tr>
+					<td><textarea 
+							style="height: 200; width:500; font-family: monospace; white-space: pre-wrap;"
+							ng-model="newDocForm.csr" required ></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: right;"><input
+						type="submit" value="Sign" class="blue-button" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div
+		ng-if="newDocForm.signed">
+			<table style="width: 480">
+
+				<tr>
+					<th colspan="2" style="color: white;">Certificate Signed</th>
+				</tr>
+				<tr>
+					<td>Certificate Details</td>
+					<td ><p style="font-family: monospace; font-size:100%; white-space: pre;">{{newDocForm.certInfo}}</p></td>
+				</tr>
+			</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+body {
+	background-image: url("../images/iphone7plus_black.png");
+	background-repeat: no-repeat;
+	padding: 96px 34px 70px 34px;
+	background-size: 822px 1500px;
+	transform: scale(1.5);
+    transform-origin: 0 0;
+   -moz-transform: scale(0.4, 0.4);
+   zoom: 1.0;
+   zoom: 50%;
+
+}

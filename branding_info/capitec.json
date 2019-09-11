@@ -1,0 +1,10 @@
+{
+  "logo_image_name": "capitec.png",
+  "logo_background_colour": "#F8F8FF",
+  "logo_height": 65,
+  "logo_background_size_width": 320,
+  "logo_background_size_height": 65,
+  "body_background_colour": "#F8F8FF",
+  "table_heading_background_colour": "#C83C37",
+  "submit_button_background_colour": "#00486D"
+}

@@ -1,0 +1,106 @@
+<html>
+<head>
+
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<link rel='stylesheet'
+	href='//cdn.jsdelivr.net/foundation/5.0.2/css/foundation.min.css' />
+<!-- Font Awesome icons (Bootstrap, Foundation, and jQueryUI also supported) -->
+<link rel='stylesheet'
+	href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="angular/angular.js"></script>
+<script src="js/register.controller.js"></script>
+<link rel="stylesheet" href="styles/style.css" />
+<link rel="stylesheet" href="/Other/entersektBranding" />
+<title>Signer Registration</title>
+<head>
+<body ng-app="MainModule" ng-controller="MainController">
+	<div class="logo"></div>
+	<div class="error-box" ng-if="errorMessage">{{ errorMessage }}</div>
+	<div ng-if="!newDocForm.csrGenerated">
+		<form ng-submit="registerSigner()">
+			<table style="width: 480">
+
+				<tr>
+					<th colspan="2" style="color: white;">Register Signer</th>
+				</tr>
+				<tr>
+					<td>Name</td>
+					<td><input type="text" ng-model="newDocForm.name" required /></td>
+				</tr>
+				<tr>
+					<td>Organisation</td>
+					<td><input type="text" ng-model="newDocForm.organisation"
+						required /></td>
+				</tr>
+				<tr>
+					<td>Country</td>
+					<td><input type="text" ng-model="newDocForm.country" required /></td>
+				</tr>
+				<tr>
+					<td>Signature Image (optional)</td>
+					<td><input type="file" file-model="newDocForm.signatureFile" accept=".PNG" /></td>
+				</tr>
+				<tr>
+					<td>Initials Image (optional)</td>
+					<td><input type="file" file-model="newDocForm.initialsFile" accept=".PNG" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: right;"><input
+						type="submit" value="Register" class="blue-button" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div ng-if="newDocForm.csrGenerated && !newDocForm.registered">
+		<form ng-submit="registerCertificate()">
+			<table style="width: 480">
+
+				<tr>
+					<th colspan="2" style="color: white;">Certificate Ready for
+						Signing by Client Identity Management</th>
+				</tr>
+				<tr>
+					<td>Certificate Signing Request</td>
+					<td><p
+							style="font-family: monospace; font-size: 100%; white-space: pre;">{{newDocForm.csr}}</p></td>
+				</tr>
+				<tr>
+					<td>Signed Certificate</td>
+					<td><textarea
+							style="height: 350; width: 500; font-family: monospace; font-size: 100%; white-space: pre;"
+							ng-model="newDocForm.certificate" required /></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: right;"><input
+						type="submit" value="Save" class="blue-button" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div ng-if="newDocForm.registered">
+		<table style="width: 480">
+
+			<tr>
+				<th colspan="2" style="color: white;">Signed Certificate Loaded</th>
+			</tr>
+			<tr>
+				<td>Signature Graphic</td>
+				<td><img id="signatureImg" ng-src={{newDocForm.signatureSrc}}></td>
+				
+			</tr>
+			<tr>
+				<td>Initial Graphic</td>
+				<td><img id="initialsImg" ng-src={{newDocForm.initialsSrc}}></td>
+				
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
